@@ -1,8 +1,10 @@
 
-# 🔐 Network Documentation: VPN, VLANs, STP, and SNMP
+# 🔐 Network Documentation M145 Project
+
+
 
 ## 🌐 Topology Overview
-
+![alt text](image.png)
 - **Router1**
   - Subinterfaces:
     - VLAN 10 → 192.168.10.1/24
@@ -22,6 +24,7 @@
 - **PCs**
   - PC3, PC4 → VLAN10 → 192.168.10.x
   - PC5, PC6 → VLAN30 → 192.168.30.x
+  - PC10, PC11 → VLAN20 → 192.168.2.x
 
 ## ✅ VLAN Verification Commands
 
@@ -39,6 +42,7 @@ Check STP configuration:
 ```
 show spanning-tree vlan 10
 show spanning-tree vlan 30
+show spanning-tree vlan 20
 ```
 
 ## ✅ VPN Verification Commands
@@ -48,10 +52,6 @@ On **Router1 and Router2**:
 show crypto isakmp sa
 show crypto ipsec sa
 ```
-
-Look for:
-- `QM_IDLE` → ISAKMP up
-- Packet counters increasing under IPsec SA
 
 ## ✅ Important Ping Tests
 
@@ -107,3 +107,8 @@ show crypto ipsec sa
 ping <destination>
 snmpget -v2c -c public <router1-ip> sysUpTime.0
 ```
+
+
+## Keys
+vpn key: 123456
+snmp string: public
