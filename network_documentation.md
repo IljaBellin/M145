@@ -13,7 +13,7 @@
   - IPsec + ISAKMP used for VPN encryption
 
 - **Router2**
-  - Local LAN: 192.168.2.0/24
+  - VLAN: 192.168.2.0/24
   - VPN to Router1 over 10.0.0.0/30
 
 - **Switches**
@@ -57,29 +57,16 @@ show crypto ipsec sa
 
 | Source       → Destination            | Example Command                    |
 |--------------------------------------|-----------------------------------|
-| PC3 → PC4 (same VLAN)              | ping 192.168.10.x                 |
-| PC5 → PC6 (same VLAN)              | ping 192.168.30.x                 |
-| PC3 → PC5 (inter-VLAN)             | ping 192.168.30.x                 |
+| PC3 → PC4 (same VLAN)              | ping 192.168.30.4                 |
+| PC5 → PC6 (same VLAN)              | ping 192.168.10.6                 |
+| PC3 → PC5 (inter-VLAN)             | ping 192.168.10.5                 |
 | PC3 → Router2 (VPN)                | ping 10.0.0.2                     |
-| PC3 → Router2 LAN (behind VPN)    | ping 192.168.2.x                  |
-| Router1 → Router2 LAN              | ping 192.168.2.x                  |
+| PC3 → Router2 LAN (behind VPN)    | ping 192.168.2.1                  |
+| Router1 → PC10              | ping 192.168.2.10                  |
 
 ## ✅ SNMP Query Example
 
-Ensure SNMP is configured on Router1:
-```
-snmp-server community public RO
-```
-
-Example SNMP query from SNMP manager:
-```
-snmpget -v2c -c public <router1-ip> sysUpTime.0
-```
-
-Expected result:
-```
-DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (xxxxx) uptime
-```
+Go to desktop mib browser and check properties of other devices
 
 ## ✅ Final Checklist
 
@@ -105,10 +92,9 @@ show spanning-tree vlan 30
 show crypto isakmp sa
 show crypto ipsec sa
 ping <destination>
-snmpget -v2c -c public <router1-ip> sysUpTime.0
 ```
 
 
 ## Keys
-vpn key: 123456
-snmp string: public
+vpn key: ´´´123456´´´
+snmp string: ´´´public´´´
